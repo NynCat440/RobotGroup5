@@ -1,5 +1,7 @@
 #include <tcs3200.h>
 
+String currentState = "Null";
+
 //Nayan, robot startup
 
 #define IR_1 4
@@ -18,9 +20,14 @@
 #define MOTOR_PIN3 6
 #define MOTOR_PIN4 9
 
+#define TRIG_PIN 10
+#define ECHO_PIN 11
+
 unsigned long irSensorMillis = 0;
 
 unsigned long colorSensorMillis = 0;
+
+unsigned long ultrasonicSensorMillis = 0;
 
 void setup() {
   Serial.begin(9600);
@@ -33,6 +40,9 @@ void setup() {
   pinMode(MOTOR_PIN2, OUTPUT);
   pinMode(MOTOR_PIN3, OUTPUT);
   pinMode(MOTOR_PIN4, OUTPUT);
+
+  pinMode(ECHO_PIN, INPUT);
+  pinMode(TRIG_PIN, OUTPUT);
 }
 
 void loop() {
@@ -47,12 +57,10 @@ void loop() {
     readColorSensor();
   }
 
-  motorControl(255, 255);
-  delay(1000);
-  motorControl(0, 0);
-  delay(100);
-  motorControl(255, -255);
-  delay(500);
-  motorControl(0, 0);
-  delay(100);
+  if (currentMillis - ultrasonicSensorMillis >= 500) {
+    ultrasonicSensorMillis = currentMillis;
+    readUltrasonicSensor();
+  }
+  robotLogic();
+  motorLogic();
 }
