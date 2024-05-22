@@ -1,8 +1,8 @@
+//Nayan, robot startup
+
 #include <tcs3200.h>
 
 String currentState = "Null";
-
-//Nayan, robot startup
 
 #define IR_1 4
 #define IR_2 7
@@ -62,5 +62,4 @@ void loop() {
     readUltrasonicSensor();
   }
   robotLogic();
-  motorLogic();
 }
