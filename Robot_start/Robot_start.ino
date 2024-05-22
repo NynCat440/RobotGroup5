@@ -3,6 +3,12 @@
 #include <tcs3200.h>
 
 String currentState = "Null";
+String oldCurrentState = "Null";
+
+String turnDirection = "";
+String turnLastDirection = "";
+bool isTurning = false;
+bool wallDetected = false;
 
 #define IR_1 4
 #define IR_2 7
