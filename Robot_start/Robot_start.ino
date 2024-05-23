@@ -35,6 +35,8 @@ unsigned long colorSensorMillis = 0;
 
 unsigned long ultrasonicSensorMillis = 0;
 
+int currentDistance = 0;
+
 void setup() {
   Serial.begin(9600);
   pinMode(IR_1, INPUT);
